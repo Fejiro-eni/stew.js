@@ -1,0 +1,268 @@
+/*CAUTION: NOT YET TESTED - WORK IN PROGRESS*/
+/*!
+ * stew.css — Visual utilities & components for stew.js
+ * Author: Fejiro Eni
+ * Reworked by: chatGPT_AI
+ * Package: Stew
+ * License: MIT
+ *
+ * A compact, opinionated stylesheet that provides small UI utilities used by
+ * stew.js (toasts, notifications, toggles, hints, switches, small animations,
+ * and input helpers). Designed to be lightweight, accessible and easy to extend.
+ *
+ * Notes
+ * - This file intentionally supports both semantic class names (.hint) and the
+ *   original custom tag-style selectors (hint) to preserve backwards compatibility.
+ * - Works well with stew.js (expect IDs like #toast and #notification to be present).
+ * - Prefers reduced motion when user has that preference set.
+ */
+
+/* ========== Theme variables (customize as needed) ========== */
+:root {
+  --stew-bg: #ffffff;
+  --stew-text: #333333;
+  --stew-muted: #7a7a7a;
+  --stew-accent: #2196f3;
+  --stew-danger: #ff4d3f;
+  --stew-toast-bg: rgba(0,0,0,0.72);
+  --stew-radius: 8px;
+  --stew-z: 2147483646;
+  --stew-transition-fast: 150ms;
+  --stew-transition-medium: 300ms;
+  --stew-transition-slow: 600ms;
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+/* ========== Utility animation / transition helpers ========== */
+/* Duration utilities (kept for backwards compatibility) */
+.a01,*[a01]{ animation-duration: .1s !important; }
+.a03,*[a03]{ animation-duration: .3s !important; }
+.a05,*[a05]{ animation-duration: .5s !important; }
+.a07,*[a07]{ animation-duration: .7s !important; }
+.a1,*[a1]{ animation-duration: 1s !important; }
+.a3,*[a3]{ animation-duration: 3s !important; }
+.a5,*[a5]{ animation-duration: 5s !important; }
+
+/* Delay helpers */
+.d01,*[d01]{ animation-delay: .1s !important; }
+.d03,*[d03]{ animation-delay: .3s !important; }
+.d05,*[d05]{ animation-delay: .5s !important; }
+.d1,*[d1]{ animation-delay: 1s !important; }
+.d3,*[d3]{ animation-delay: 3s !important; }
+
+/* Transition helpers */
+.t01,*[t01]{ transition-duration: .1s !important; }
+.t05,*[t05]{ transition-duration: .5s !important; }
+.t1,*[t1]{ transition-duration: 1s !important; }
+
+/* inline helper */
+.inline, *[inline] { display: inline-block !important; vertical-align: middle; }
+
+/* ========== HASC AUTION / CAUTION helpers ========== */
+/* Supports both .hascaution > .caution and hascaution > caution */
+.hascaution, hascaution { position: relative; display: inline-block; }
+.caution, caution { display: none; box-sizing: border-box; }
+.hascaution:hover .caution, hascaution:hover caution { display: block; opacity: 1; }
+
+/* Elements that should hide when caution is visible */
+.caution--, caution--, .caution[--], caution[--] { display: block; }
+.hascaution:hover .caution--, hascaution:hover caution--{ display: none; visibility: hidden; }
+
+/* Animated caution content (a variant that animates open) */
+.caution-a, caution-a, .caution[a], caution[a] {
+  opacity: 0;
+  max-height: 0;
+  max-width: 0;
+  font-size: 0;
+  pointer-events: none;
+  transition: opacity var(--stew-transition-medium) ease, max-height var(--stew-transition-medium) ease, font-size var(--stew-transition-medium) ease;
+}
+.hascaution:hover .caution-a, hascaution:hover caution-a,
+.hascaution:hover .caution[a], hascaution:hover caution[a] {
+  opacity: 1;
+  pointer-events: all;
+  max-height: 400px;
+  max-width: 100%;
+  font-size: 1rem;
+}
+
+/* ========== HINT (compact help text) ========== */
+/* Supports both .hint .topic/.content and hint>topic etc. */
+.hint, hint {
+  display: inline-block;
+  max-width: 6.5rem;
+  max-height: 2.2rem;
+  overflow: hidden;
+  border-radius: 6px;
+  padding: 0;
+  line-height: 1.4rem;
+  color: var(--stew-text);
+  transition: max-width var(--stew-transition-medium) ease, max-height var(--stew-transition-medium) ease, padding var(--stew-transition-medium) ease;
+  box-sizing: border-box;
+}
+.hint:hover, hint:hover {
+  max-width: 22rem;
+  max-height: 8rem;
+  padding: .35rem;
+}
+
+/* topic/content structure - supports both class and element forms */
+.hint > .topic, hint > topic,
+.hint > .topic::after, hint > topic::after {
+  font-weight: 600;
+  display: inline-block;
+}
+.hint > .topic::after, hint > topic::after { content: " ..."; opacity: .8; transition: opacity var(--stew-transition-fast); }
+
+.hint > .content, hint > content {
+  display: block;
+  font-size: 0;
+  opacity: 0;
+  transition: font-size var(--stew-transition-medium) ease, opacity var(--stew-transition-medium) ease;
+}
+.hint:hover > .content, hint:hover > content {
+  font-size: 1rem;
+  opacity: 1;
+}
+/* When hint expands remove the trailing dots */
+.hint:hover > .topic::after, hint:hover > topic::after { content: ""; opacity: 0; }
+
+/* ========== SWITCHES / SWITCH (small inline toggles) ========== */
+.switches, switches { display: inline-flex; gap: .5rem; align-items: center; }
+.switchesright, switchesleft, .switchesright, .switchesleft { display:block; }
+.switch, switch {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  cursor: pointer;
+  opacity: .7;
+  transition: opacity var(--stew-transition-medium) ease, transform var(--stew-transition-fast) ease;
+  position: relative;
+  user-select: none;
+}
+.switch[on], .switch.on, .switch[active], .switch.active, .switch[activated], .switch.activated {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+/* small helper slots */
+.switch > .icon, switch > icon, .switch > icon { margin-right: .25rem; }
+.switch > .name, switch > name { font-size: .8rem; color: var(--stew-muted); }
+.switch > .count, switch > count { font-size: .65rem; color: #67573b; opacity: .9; }
+
+/* notification dot */
+.switch > .notification, switch > notification, .switch > .noti, switch > noti {
+  width: .45rem; height: .45rem; border-radius: 50%; background: var(--stew-danger); position: absolute; top: .1rem; right: .1rem; opacity: 0; transition: opacity var(--stew-transition-medium);
+}
+.switch[notify] > .notification, .switch[notify] > noti, .switch[notify] .notification { opacity: 1; }
+
+/* ========== Responsive helpers ========== */
+.hideonmobile, hideonmobile { display: block; }
+.showonmobile, showonmobile { display: none; }
+
+@media (max-width: 800px) {
+  .hideonmobile, hideonmobile { display: none !important; width: 0; height: 0; }
+  .showonmobile, showonmobile { display: block !important; }
+  .showonmobile.inline, showonmobile.inline, .showonmobile[inline], showonmobile[inline] { display: inline-block !important; }
+}
+
+/* ========== Textarea auto-grow helper ========== */
+.textarea-growth-controller { display: grid; position: relative; width: 100%; }
+.textarea-growth-controller > textarea {
+  resize: none;
+  overflow: hidden;
+  grid-area: 1 / 1 / 2 / 2;
+  min-height: 3rem;
+  padding: .5rem;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,.12);
+  font: inherit;
+}
+.textarea-growth-controller::after {
+  content: attr(data-replicated-value) " ";
+  white-space: pre-wrap;
+  visibility: hidden;
+  grid-area: 1 / 1 / 2 / 2;
+  padding-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+/* ========== Toast (bottom-right) ========== */
+#toast {
+  display: none;
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  max-width: 360px;
+  width: calc(100% - 2rem);
+  background: var(--stew-toast-bg);
+  color: #fff;
+  padding: .6rem .8rem;
+  border-radius: var(--stew-radius);
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+  font-size: .95rem;
+  text-align: center;
+  z-index: calc(var(--stew-z) + 1);
+}
+
+/* ========== Slide-in notification card ========== */
+#notification {
+  width: 320px;
+  max-width: calc(100% - 2rem);
+  position: fixed;
+  bottom: 1.25rem;
+  right: -120%;
+  transition: right var(--stew-transition-medium) cubic-bezier(.2,.9,.2,1);
+  padding: .6rem;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--stew-text);
+  box-shadow: 0 8px 22px rgba(0,0,0,.15);
+  font-size: .95rem;
+  z-index: var(--stew-z);
+  overflow: hidden;
+}
+#notification img { width: 40px; height: 40px; border-radius: 6px; object-fit: cover; margin-right: .6rem; display: inline-block; vertical-align: middle; }
+#notification heading, #notification .heading { display:inline-block; font-weight:700; margin:0; padding-left: .4rem; vertical-align: middle; color: var(--stew-text); }
+#notification text, #notification .text { display:block; color: var(--stew-muted); margin-top: .25rem; }
+#notification .notification_link { display:inline-block; margin-top:.6rem; color: var(--stew-accent); text-decoration:none; font-weight:600; }
+#notification dismiss, #notification .dismiss { position:absolute; right:.4rem; top:.35rem; cursor:pointer; background: transparent; border: none; color: var(--stew-danger); padding:.25rem; border-radius:6px; }
+
+/* when visible, JS should set right to 20px (stew.js does this) */
+/*#notification.show { right: 1.25rem !important; }*/
+
+/* ========== Small animation primitives ========== */
+@keyframes stew-fadeout { from { opacity: 1; } to { opacity: 0; } }
+@keyframes stew-shake { 0% { transform: translateX(0); } 15% { transform: translateX(-6px); } 40% { transform: translateX(6px); } 70% { transform: translateX(-2px); } 100% { transform: translateX(0); } }
+@keyframes stew-rightshake { 0% { transform: translateX(0); } 20% { transform: translateX(6px); } 40% { transform: translateX(-4px); } 100% { transform: translateX(0); } }
+@keyframes stew-bounce { 0%, 100% { transform: translateY(0); } 30% { transform: translateY(-8px); } 60% { transform: translateY(-4px); } }
+@keyframes stew-beat { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.12); } 60% { transform: scale(1); } }
+@keyframes stew-blink { 0% { opacity: .4; } 50% { opacity: 1; } 100% { opacity: .4; } }
+@keyframes stew-enterFromRight { from { transform: translateX(200%); } to { transform: translateX(0); } }
+@keyframes stew-leaveToLeft { from { transform: translateX(0); } to { transform: translateX(-200%); } }
+
+.fadeout { animation: stew-fadeout .9s both; }
+.bounce { animation: stew-bounce 1.2s infinite; }
+.shake { animation: stew-shake .8s ease-in-out infinite; }
+.rightshake { animation: stew-rightshake .8s ease-in-out infinite; }
+.beat { animation: stew-beat 1s infinite; }
+.blink { animation: stew-blink 1s infinite; }
+.enterFromRight { animation: stew-enterFromRight .9s both; }
+.leaveToLeft { animation: stew-leaveToLeft .9s both; }
+
+/* Loading / state helpers */
+.loadingv { filter: grayscale(.9) brightness(.85); animation: pulseLoading 3s infinite alternate; }
+.loadedv { animation: loadedState .6s both; }
+.failedv { animation: failedState .8s both; filter: grayscale(.6); }
+
+@keyframes pulseLoading { from { filter: grayscale(.9) brightness(.85); } to { filter: grayscale(.6) brightness(1.15); } }
+@keyframes loadedState { from { filter: grayscale(1) brightness(.9); } to { filter: grayscale(0) brightness(1); } }
+@keyframes failedState { from { filter: grayscale(1) brightness(1); } to { filter: grayscale(.7) brightness(1); } }
+
+/* ========== Small helpers ========== */
+.help:hover { background-color: #f7f3f3; }
