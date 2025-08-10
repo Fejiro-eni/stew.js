@@ -82,7 +82,7 @@ Download stew.js and include it after jQuery in your HTML:
 
 MIT License
 
-Copyright (c) [Year] [Your Name]
+Copyright (c) 2020 Fejiro Eni
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -91,13 +91,13 @@ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
-[... full MIT text here ...]
+
 
 ## ✍ Author
 
-- [Your Name Here]
-- Twitter: @YourHandle
-- Website: yourwebsite.com
+- Fejiro Eni
+- Twitter: None
+- Website: [Fejiro Eni](https://fejiro-eni.github.io/)
 
 ## 💡 Notes
 
