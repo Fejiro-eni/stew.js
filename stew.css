@@ -1,0 +1,1207 @@
+/*!
+ * stew.css — Visual utilities & components for stew.js
+ * Author: Fejiro Eni (original)
+ * Reworked by: 
+ * Package: Stew
+ * License: MIT
+ *
+ * A compact, opinionated stylesheet that provides small UI utilities used by
+ * stew.js (toasts, notifications, toggles, hints, switches, small animations,
+ * and input helpers). Designed to be lightweight, accessible and easy to extend.
+ *
+ * Notes
+ * - This file intentionally supports both semantic class names (.hint) and the
+ *   original custom tag-style selectors (hint) to preserve backwards compatibility.
+ * - Works well with stew.js (expect IDs like #toast and #notification to be present).
+ * - Prefers reduced motion when user has that preference set.
+
+NOTATIONS:
+
+[class/tag]-js --> shows that a class needs js 
+	|OR|: Use "js" as an attribute
+
+[class/tag]-a --> will animate the actions of the class or tag animates the action 
+	|OR|: Use "a" as an attribute
+
+[class/tag]-- --> opposite action to the default class/tag 
+	|OR|: Use "--" as an attribute
+
+a# --> # is odd integer from 1-15, lead by 0 for 0.#, e.g: 07=0.7, animation duration
+	|OR|: Use "a#" as an attribute
+
+d# --> # is odd integer from 1-15, lead by 0 for 0.#, e.g: 07=0.7, animation delay
+	|OR|: Use "d#" as an attribute
+
+t# --> # is odd integer from 1-15, lead by 0 for 0.#, e.g: 07=0.7, transition
+	|OR|: Use "t#" as an attribute
+
+inline --> enforces inline-block,
+	|OR|: Use "inline" as an attribute
+
+
+
+TABLE OF CONTENTS:
+
+hideonmobile -> CLASS/TAG || elements you want to hide on mobile 
+showonmobile -> CLASS/TAG || 
+hascaution -> CLASS/TAG || elements you want to have a caution note or extra note within itself
+	|-> caution -> CLASS/TAG || the element (warning, caution or just extra note) you want to appear when hascaution is active.  must be inside the hascaution
+	|-> caution-- -> CLASS/TAG || the element you want to disappear when hascaution is active. (might be needed for space management)  must be inside the hascaution	
+hint -> CLASS/TAG  
+	|-> topic -> CLASS/TAG || text that would always visible.  must be inside the hint
+	|-> content -> CLASS/TAG ||Optional-creates a neater animation || text that would be only visible when hint is active.  must be inside the hint
+switches->
+toast->
+*/
+
+
+
+/*NOTATIONS:*/
+.a1, *[a1]{
+	animation-duration: 1s !important;
+}
+.a3, *[a3]{
+	animation-duration: 3s !important;
+}
+.a5, *[a5]{
+	animation-duration: 5s !important;
+}
+.a7, *[a7]{
+	animation-duration: 7s !important;
+}
+.a9, *[a9]{
+	animation-duration: 9s !important;
+}
+.a11, *[a11]{
+	animation-duration: 11s !important;
+}
+.a13, *[a13]{
+	animation-duration: 13s !important;
+}
+.a15, *[a15]{
+	animation-duration: 15s !important;
+}
+.a01, *[a01]{
+	animation-duration: .1s !important;
+}
+.a03, *[a03]{
+	animation-duration: .3s !important;
+}
+.a05, *[a05]{
+	animation-duration: .5s !important;
+}
+.a07, *[a07]{
+	animation-duration: .7s !important;
+}
+.a09, *[a09]{
+	animation-duration: .9s !important;
+}
+.a011, *[a011]{
+	animation-duration: 11s !important;
+}
+.a013, *[a013]{
+	animation-duration: 13s !important;
+}
+.a015, *[a015]{
+	animation-duration: 15s !important;
+}
+
+.d1, *[d1]{
+	animation-delay: 1s !important;
+}
+.d3, *[d3]{
+	animation-delay: 3s !important;
+}
+.d5, *[d5]{
+	animation-delay: 5s !important;
+}
+.d7, *[d7]{
+	animation-delay: 7s !important;
+}
+.d9, *[d9]{
+	animation-delay: 9s !important;
+}
+.d11, *[d11]{
+	animation-delay: 11s !important;
+}
+.d13, *[d13]{
+	animation-delay: 13s !important;
+}
+.d15, *[d15]{
+	animation-delay: 15s !important;
+}
+.d01, *[d01]{
+	animation-delay: .1s !important;
+}
+.d03, *[d03]{
+	animation-delay: .3s !important;
+}
+.d05, *[d05]{
+	animation-delay: .5s !important;
+}
+.d07, *[d07]{
+	animation-delay: .7s !important;
+}
+.d09, *[d09]{
+	animation-delay: .9s !important;
+}
+.d011, *[d011]{
+	animation-delay: 11s !important;
+}
+.d013, *[d013]{
+	animation-delay: 13s !important;
+}
+.d015, *[d015]{
+	animation-delay: 15s !important;
+}
+
+.t1, *[t1]{
+	transition: 1s !important;
+}
+.t3, *[t3]{
+	transition: 3s !important;
+}
+.t5, *[t5]{
+	transition: 5s !important;
+}
+.t7, *[t7]{
+	transition: 7s !important;
+}
+.t9, *[t9]{
+	transition: 9s !important;
+}
+.t11, *[t11]{
+	transition: 11s !important;
+}
+.t13, *[t13]{
+	transition: 13s !important;
+}
+.t15, *[t15]{
+	transition: 15s !important;
+}
+.t01, *[t01]{
+	transition: .1s !important;
+}
+.t03, *[t03]{
+	transition: .3s !important;
+}
+.t05, *[t05]{
+	transition: .5s !important;
+}
+.t07, *[t07]{
+	transition: .7s !important;
+}
+.t09, *[t09]{
+	transition: .9s !important;
+}
+.t011, *[t011]{
+	transition: 11s !important;
+}
+.t013, *[t013]{
+	transition: 13s !important;
+}
+.t015, *[t015]{
+	transition: 15s !important;
+}
+
+.inline, *[inline]{
+	display: inline-block !important;
+}
+
+
+
+/*=============hascaution/caution===================*/
+
+.caution, caution{
+    display: none;
+}
+.hascaution:hover .caution, .hascaution:hover caution, 
+hascaution:hover .caution, hascaution:hover caution  {
+      display: block;
+}
+
+
+.caution--, caution--, .caution[--], caution[--]{
+    display: block;
+}
+.hascaution:hover .caution--, .hascaution:hover caution--, 
+hascaution:hover .caution--, hascaution:hover caution--,
+.hascaution:hover .caution[--], .hascaution:hover caution[--], 
+hascaution:hover .caution[--], hascaution:hover caution[--]   {
+      display: none;
+}
+
+.caution-a, caution-a, .caution[a], caution[a]{
+	opacity: 0;
+	padding: 0 !important;
+    max-height: 0;
+    max-width: 0;
+    font-size: 0em;
+    pointer-events: none !important;
+    display: unset !important;
+}
+
+.hascaution:hover .caution-a, .hascaution:hover caution-a, 
+hascaution:hover .caution-a, hascaution:hover caution-a,
+.hascaution:hover .caution[a], .hascaution:hover caution[a], 
+hascaution:hover .caution[a], hascaution:hover caution[a] {
+      opacity: 1;
+      pointer-events: all;
+      max-height: 100%;
+      max-width: 100%;
+      font-size: 1em;
+      /*padding: 10px !important;*/
+      display:  unset !important;
+}
+
+.caution-a--, caution-a--,
+.caution--[a], caution--[a],
+.caution-a[--], caution-a[--],
+.caution[-a][--], caution[-a][--]{
+	opacity: 1;
+    pointer-events: all;
+    max-height: 100%;
+    max-width: 100%;
+    font-size: 1em;
+    /*padding: 10px !important;*/
+    display:  unset !important;
+}
+
+.hascaution:hover .caution-a--, .hascaution:hover caution-a--, 
+hascaution:hover .caution-a--, hascaution:hover caution-a--,
+.hascaution:hover .caution--[a], .hascaution:hover caution--[a], 
+hascaution:hover .caution--[a], hascaution:hover caution--[a],
+.hascaution:hover .caution-a[--], .hascaution:hover caution-a[--], 
+hascaution:hover .caution-a[--], hascaution:hover caution-a[--],
+.hascaution:hover .caution[-a][--], .hascaution:hover caution[-a][--], 
+hascaution:hover .caution[-a][--], hascaution:hover caution[-a][--] {
+	opacity: 0;
+	padding: 0 !important;
+    max-height: 0;
+    max-width: 0;
+    font-size: 0em;
+    pointer-events: none !important;
+    display:  unset !important;
+    
+}
+
+/*=============hint===================*/
+
+.hint, hint{
+    margin: 10px 0;
+    transition: .3s;
+    max-height: 2em;
+    overflow: hidden;
+    max-width: 6em;
+    border-radius: 5px;
+    padding:0 !important;
+    line-height: 1.5em;
+    /*display: block;*/
+}
+
+.hint:hover, hint:hover{
+    max-height: 100%;
+    max-width: 100%;
+    line-height: 1em;
+    padding: .3em !important;
+}
+
+hint>topic:after, .hint>topic:after,
+hint>.topic:after, .hint>topic:after {
+	content:"...";
+	font-size: 1em;
+	transition: .3s;
+}
+/**/
+hint>topic, .hint>topic,
+hint>.topic, .hint>topic {
+	font-weight: bolder;
+	padding:.3em;
+	display: inline-block;
+}
+hint>content, .hint>content,
+hint>.content, .hint>content {
+	font-size: 0em;
+	transition: .3s;
+}
+hint:hover>content, .hint:hover>content,
+hint:hover>.content, .hint:hover>content {
+	font-size: 1em;
+}
+hint:hover>topic:after, .hint:hover>topic:after,
+hint:hover>.topic:after, .hint:hover>topic:after {
+	/*content: "";*/
+	font-size: 0em;
+}
+hint:hover>topic, .hint:hover>topic,
+hint:hover>.topic, .hint:hover>topic {
+	padding: 0;
+}
+
+/*=============switches/switch===================*/
+
+switchesright, .switchesright {
+    display: block;
+    text-align: right;
+}
+
+switchesleft, .switchesleft {
+    display: block;
+    text-align: right;
+}
+
+switches, .switches {
+    display: inline-block;
+    text-align: right;
+}
+
+
+switchesright>switch, .switchesright>switch,
+switchesleft>switch, .switchesleft>switch,
+switches>switch, .switches>switch {
+    display: inline-block;
+    opacity: .6 !important;
+    cursor: pointer;
+    transition:.7;
+}
+
+switchesright>switch[on], .switchesright>switch[on],
+switchesleft>switch[on], .switchesleft>switch[on],
+switches>switch[on], .switches>switch[on],
+switchesright>switch[active], .switchesright>switch[active],
+switchesleft>switch[active], .switchesleft>switch[active],
+switches>switch[active], .switches>switch[active],
+switchesright>switch[activated], .switchesright>switch[activated],
+switchesleft>switch[activated], .switchesleft>switch[activated],
+switches>switch[activated], .switches>switch[activated],
+switchesright>switch.on, .switchesright>switch.on,
+switchesleft>switch.on, .switchesleft>switch.on,
+switches>switch.on, .switches>switch.on,
+switchesright>switch.active, .switchesright>switch.active,
+switchesleft>switch.active, .switchesleft>switch.active,
+switches>switch.active, .switches>switch.active,
+switchesright>switch.activated, .switchesright>switch.activated,
+switchesleft>switch.activated, .switchesleft>switch.activated,
+switches>switch.activated, .switches>switch.activated {
+    opacity: 1 !important;
+}
+
+
+switch>icon, .switch>icon,
+switch>.icon, .switch>.icon {
+    margin-right: 2px;
+
+}
+
+switch>onicon, .switch>onicon,
+switch>.onicon, .switch>.onicon,
+switch>activeicon, .switch>activeicon,
+switch>.activeicon, .switch>.activeicon,
+switch>on-icon, .switch>on-icon,
+switch>.on-icon, .switch>.on-icon,
+switch>active-icon, .switch>active-icon,
+switch>.active-icon, .switch>.active-icon {
+    display: none !important;
+}
+
+
+switch[on]>onicon, .switch[on]>onicon,
+switch[on]>.onicon, .switch[on]>.onicon,
+switch.on>onicon, .switch.on>onicon,
+switch.on>.onicon, .switch.on>.onicon,
+switch[on]>activeicon, .switch[on]>activeicon,
+switch[on]>.activeicon, .switch[on]>.activeicon,
+switch.on>activeicon, .switch.on>activeicon,
+switch.on>.activeicon, .switch.on>.activeicon,
+switch[active]>onicon, .switch[active]>onicon,
+switch[active]>.onicon, .switch[active]>.onicon,
+switch.active>onicon, .switch.active>onicon,
+switch.active>.onicon, .switch.active>.onicon,
+switch[active]>activeicon, .switch[active]>activeicon,
+switch[active]>.activeicon, .switch[active]>.activeicon,
+switch.active>activeicon, .switch.active>activeicon,
+switch.active>.activeicon, .switch.active>.activeicon,
+switch[activated]>onicon, .switch[activated]>onicon,
+switch[activated]>.onicon, .switch[activated]>.onicon,
+switch.activated>onicon, .switch.activated>onicon,
+switch.activated>.onicon, .switch.activated>.onicon,
+switch[activated]>activeicon, .switch[activated]>activeicon,
+switch[activated]>.activeicon, .switch[activated]>.activeicon,
+switch.activated>activeicon, .switch.activated>activeicon,
+switch.activated>.activeicon, .switch.activated>.activeicon,
+switch[on]>on-icon, .switch[on]>on-icon,
+switch[on]>.on-icon, .switch[on]>.on-icon,
+switch.on>on-icon, .switch.on>on-icon,
+switch.on>.on-icon, .switch.on>.on-icon,
+switch[on]>active-icon, .switch[on]>active-icon,
+switch[on]>.active-icon, .switch[on]>.active-icon,
+switch.on>active-icon, .switch.on>active-icon,
+switch.on>.active-icon, .switch.on>.active-icon,
+switch[active]>on-icon, .switch[active]>on-icon,
+switch[active]>.on-icon, .switch[active]>.on-icon,
+switch.active>on-icon, .switch.active>on-icon,
+switch.active>.on-icon, .switch.active>.on-icon,
+switch[active]>active-icon, .switch[active]>active-icon,
+switch[active]>.active-icon, .switch[active]>.active-icon,
+switch.active>active-icon, .switch.active>active-icon,
+switch.active>.active-icon, .switch.active>.active-icon,
+switch[activated]>on-icon, .switch[activated]>on-icon,
+switch[activated]>.on-icon, .switch[activated]>.on-icon,
+switch.activated>on-icon, .switch.activated>on-icon,
+switch.activated>.on-icon, .switch.activated>.on-icon,
+switch[activated]>active-icon, .switch[activated]>active-icon,
+switch[activated]>.active-icon, .switch[activated]>.active-icon,
+switch.activated>active-icon, .switch.activated>active-icon,
+switch.activated>.active-icon, .switch.activated>.active-icon {
+    display: unset !important;
+}
+
+switch[on]>onicon + icon, .switch[on]>onicon + icon,
+switch[on]>.onicon + icon, .switch[on]>.onicon + icon,
+switch.on>onicon + icon, .switch.on>onicon + icon,
+switch.on>.onicon + icon, .switch.on>.onicon + icon,
+switch[on]>activeicon + icon, .switch[on]>activeicon + icon,
+switch[on]>.activeicon + icon, .switch[on]>.activeicon + icon,
+switch.on>activeicon + icon, .switch.on>activeicon + icon,
+switch.on>.activeicon + icon, .switch.on>.activeicon + icon,
+switch[active]>onicon + icon, .switch[active]>onicon + icon,
+switch[active]>.onicon + icon, .switch[active]>.onicon + icon,
+switch.active>onicon + icon, .switch.active>onicon + icon,
+switch.active>.onicon + icon, .switch.active>.onicon + icon,
+switch[active]>activeicon + icon, .switch[active]>activeicon + icon,
+switch[active]>.activeicon + icon, .switch[active]>.activeicon + icon,
+switch.active>activeicon + icon, .switch.active>activeicon + icon,
+switch.active>.activeicon + icon, .switch.active>.activeicon + icon,
+switch[activated]>onicon + icon, .switch[activated]>onicon + icon,
+switch[activated]>.onicon + icon, .switch[activated]>.onicon + icon,
+switch.activated>onicon + icon, .switch.activated>onicon + icon,
+switch.activated>.onicon + icon, .switch.activated>.onicon + icon,
+switch[activated]>activeicon + icon, .switch[activated]>activeicon + icon,
+switch[activated]>.activeicon + icon, .switch[activated]>.activeicon + icon,
+switch.activated>activeicon + icon, .switch.activated>activeicon + icon,
+switch.activated>.activeicon + icon, .switch.activated>.activeicon + icon,
+switch[on]>onicon + .icon, .switch[on]>onicon + .icon,
+switch[on]>.onicon + .icon, .switch[on]>.onicon + .icon,
+switch.on>onicon + .icon, .switch.on>onicon + .icon,
+switch.on>.onicon + .icon, .switch.on>.onicon + .icon,
+switch[on]>activeicon + .icon, .switch[on]>activeicon + .icon,
+switch[on]>.activeicon + .icon, .switch[on]>.activeicon + .icon,
+switch.on>activeicon + .icon, .switch.on>activeicon + .icon,
+switch.on>.activeicon + .icon, .switch.on>.activeicon + .icon,
+switch[active]>onicon + .icon, .switch[active]>onicon + .icon,
+switch[active]>.onicon + .icon, .switch[active]>.onicon + .icon,
+switch.active>onicon + .icon, .switch.active>onicon + .icon,
+switch.active>.onicon + .icon, .switch.active>.onicon + .icon,
+switch[active]>activeicon + .icon, .switch[active]>activeicon + .icon,
+switch[active]>.activeicon + .icon, .switch[active]>.activeicon + .icon,
+switch.active>activeicon + .icon, .switch.active>activeicon + .icon,
+switch.active>.activeicon + .icon, .switch.active>.activeicon + .icon,
+switch[activated]>onicon + .icon, .switch[activated]>onicon + .icon,
+switch[activated]>.onicon + .icon, .switch[activated]>.onicon + .icon,
+switch.activated>onicon + .icon, .switch.activated>onicon + .icon,
+switch.activated>.onicon + .icon, .switch.activated>.onicon + .icon,
+switch[activated]>activeicon + .icon, .switch[activated]>activeicon + .icon,
+switch[activated]>.activeicon + .icon, .switch[activated]>.activeicon + .icon,
+switch.activated>activeicon + .icon, .switch.activated>activeicon + .icon,
+switch.activated>.activeicon + .icon, .switch.activated>.activeicon + .icon,
+switch[on]>on-icon + icon, .switch[on]>on-icon + icon,
+switch[on]>.on-icon + icon, .switch[on]>.on-icon + icon,
+switch.on>on-icon + icon, .switch.on>on-icon + icon,
+switch.on>.on-icon + icon, .switch.on>.on-icon + icon,
+switch[on]>active-icon + icon, .switch[on]>active-icon + icon,
+switch[on]>.active-icon + icon, .switch[on]>.active-icon + icon,
+switch.on>active-icon + icon, .switch.on>active-icon + icon,
+switch.on>.active-icon + icon, .switch.on>.active-icon + icon,
+switch[active]>on-icon + icon, .switch[active]>on-icon + icon,
+switch[active]>.on-icon + icon, .switch[active]>.on-icon + icon,
+switch.active>on-icon + icon, .switch.active>on-icon + icon,
+switch.active>.on-icon + icon, .switch.active>.on-icon + icon,
+switch[active]>active-icon + icon, .switch[active]>active-icon + icon,
+switch[active]>.active-icon + icon, .switch[active]>.active-icon + icon,
+switch.active>active-icon + icon, .switch.active>active-icon + icon,
+switch.active>.active-icon + icon, .switch.active>.active-icon + icon,
+switch[activated]>on-icon + icon, .switch[activated]>on-icon + icon,
+switch[activated]>.on-icon + icon, .switch[activated]>.on-icon + icon,
+switch.activated>on-icon + icon, .switch.activated>on-icon + icon,
+switch.activated>.on-icon + icon, .switch.activated>.on-icon + icon,
+switch[activated]>active-icon + icon, .switch[activated]>active-icon + icon,
+switch[activated]>.active-icon + icon, .switch[activated]>.active-icon + icon,
+switch.activated>active-icon + icon, .switch.activated>active-icon + icon,
+switch.activated>.active-icon + icon, .switch.activated>.active-icon + icon,
+switch[on]>on-icon + .icon, .switch[on]>on-icon + .icon,
+switch[on]>.on-icon + .icon, .switch[on]>.on-icon + .icon,
+switch.on>on-icon + .icon, .switch.on>on-icon + .icon,
+switch.on>.on-icon + .icon, .switch.on>.on-icon + .icon,
+switch[on]>active-icon + .icon, .switch[on]>active-icon + .icon,
+switch[on]>.active-icon + .icon, .switch[on]>.active-icon + .icon,
+switch.on>active-icon + .icon, .switch.on>active-icon + .icon,
+switch.on>.active-icon + .icon, .switch.on>.active-icon + .icon,
+switch[active]>on-icon + .icon, .switch[active]>on-icon + .icon,
+switch[active]>.on-icon + .icon, .switch[active]>.on-icon + .icon,
+switch.active>on-icon + .icon, .switch.active>on-icon + .icon,
+switch.active>.on-icon + .icon, .switch.active>.on-icon + .icon,
+switch[active]>active-icon + .icon, .switch[active]>active-icon + .icon,
+switch[active]>.active-icon + .icon, .switch[active]>.active-icon + .icon,
+switch.active>active-icon + .icon, .switch.active>active-icon + .icon,
+switch.active>.active-icon + .icon, .switch.active>.active-icon + .icon,
+switch[activated]>on-icon + .icon, .switch[activated]>on-icon + .icon,
+switch[activated]>.on-icon + .icon, .switch[activated]>.on-icon + .icon,
+switch.activated>on-icon + .icon, .switch.activated>on-icon + .icon,
+switch.activated>.on-icon + .icon, .switch.activated>.on-icon + .icon,
+switch[activated]>active-icon + .icon, .switch[activated]>active-icon + .icon,
+switch[activated]>.active-icon + .icon, .switch[activated]>.active-icon + .icon,
+switch.activated>active-icon + .icon, .switch.activated>active-icon + .icon,
+switch.activated>.active-icon + .icon, .switch.activated>.active-icon + .icon {
+    display: none !important;
+}
+
+/*
+switch>onicon + icon, .switch>onicon + icon,
+switch>onicon + .icon, .switch>onicon + .icon,
+switch>.onicon + icon, .switch>.onicon + icon,
+switch>.onicon + .icon, .switch>.onicon + .icon {
+    opacity:1;
+}*/
+
+
+switch>name, .switch>name,
+switch>.name, .switch>.name {
+	font-size: .7em;
+    opacity: .7;
+    margin-left: -2em;
+    top: -.3em;
+    position: relative;
+}
+
+switch>count, .switch>count,
+switch>.count, .switch>.count {
+    font-size: .6em;
+    top: 0.6em;
+    position: relative;
+    display: inline-block;
+    left: -0.9em;
+    right: -0.9em;
+    color: #67573b;
+}
+
+switch>notification, .switch>notification,
+switch>.notification, .switch>.notification,
+switch>noti, .switch>noti,
+switch>.noti, .switch>.noti {
+    height: 4px;
+    width: 4px;
+    background: red;
+    display: inherit;
+    border-radius: 50%;
+    position: absolute;
+    opacity: 0;
+    transition:.7;
+}
+
+switch[notify]>notification, .switch[notify]>notification,
+switch[notify]>.notification, .switch[notify]>.notification,
+switch[notify]>noti, .switch[notify]>noti,
+switch[notify]>.noti, .switch[notify]>.noti {
+    opacity: 1;
+}
+
+
+.hideonmobile, hideonmobile{
+	display: block;
+}
+
+.showonmobile, showonmobile{
+	display: none !important;
+}
+
+@media screen and (max-width: 800px) {
+
+	.hideonmobile, hideonmobile{
+	    width: 0px; 
+	    height: 0px; 
+	    display: none !important; 
+	}
+
+	.showonmobile, showonmobile{
+		display: block !important;
+	}
+
+	.showonmobile.inline, showonmobile.inline, .showonmobile[inline], showonmobile[inline]{
+		display: inline-block !important;
+	}
+
+}
+
+
+/*----------------------growing textarea----------------------------*/
+
+    .textarea-growth-controller{
+        display: grid;
+    }
+
+    .textarea-growth-controller > textarea {
+        resize: none;
+        overflow: hidden;
+        grid-area: 1 / 1 / 2 / 2;
+        height: unset !important;
+    }
+
+    .textarea-growth-controller::after {
+        padding-bottom: 3em;
+    }
+    .textarea-growth-controller > textarea, .textarea-growth-controller::after {
+        border: 1px solid black;
+        /* padding: 0.5rem; */
+        font: inherit;
+        grid-area: 1 / 1 / 2 / 2;
+    }
+    .textarea-growth-controller::after {
+        content: attr(data-replicated-value) " ";
+        white-space: pre-wrap;
+        visibility: hidden;
+        /* padding-top: 10em; */
+    }
+
+    .textarea-growth-controller > textarea {
+        resize: none;
+        overflow: hidden;
+    }
+
+/*-------------------------------------------------*/
+
+
+
+/*---------------------animations-----------------------*/
+.fadeout { 
+
+  animation: fadingin 1s;
+}
+
+
+@-webkit-keyframes fadingin {
+   0% { opacity: 1 }
+   100% { opacity: 0;  }
+
+}
+@-moz-keyframes fadingin {
+   0% { opacity: 1 }
+   100% { opacity: 0;  }
+}
+keyframes fadingin {
+   0% { opacity: 1 }
+   100% { opacity: 0;  }
+   
+}
+
+
+.bounce { 
+
+  animation: bouncing 10s infinite;
+    
+}
+
+
+@-webkit-keyframes bouncing {
+    % { top: 0px;  }
+   1% { top: -10px;  }
+   1.6% { top: -9px;  }
+    3% { top: 0px;  }
+    5% { top: -7px;  }
+    5.4% { top: -6px;  }
+    7.5% { top: 0px;  }
+    9% { top: -3px;  }
+    10% { top: 0px;  }
+    100% { top: 0px;  }
+
+   
+
+}
+@-moz-keyframes bouncing {
+       % { top: 0px;  }
+   1% { top: -10px;  }
+   1.6% { top: -9px;  }
+    3% { top: 0px;  }
+    5% { top: -7px;  }
+    5.4% { top: -6px;  }
+    7.5% { top: 0px;  }
+    9% { top: -3px;  }
+    10% { top: 0px;  }
+    100% { top: 0px;  }
+}
+keyframes bouncing {
+       % { top: 0px;  }
+   1% { top: -10px;  }
+   1.6% { top: -9px;  }
+    3% { top: 0px;  }
+    5% { top: -7px;  }
+    5.4% { top: -6px;  }
+    7.5% { top: 0px;  }
+    9% { top: -3px;  }
+    10% { top: 0px;  }
+    100% { top: 0px;  }
+   
+}
+
+
+
+.shake { 
+
+  animation: shaking 5s infinite;
+    
+}
+
+
+@-webkit-keyframes shaking {
+       0% { left: 0px; font-size: 14px; }
+   1% { left: -5px; font-size: 14px; }
+   
+    3% { left: 5px; font-size: 14px; }
+
+    5% { left: -3px; font-size: 14px; }
+    
+    7% { left: 3px; font-size: 14px; }
+    9% { left: -1px; font-size: 14px; }
+    10% { left: 0px; font-size: 14px; }
+    100% { left: 0px; font-size: 14px; }
+
+   
+
+}
+@-moz-keyframes shaking {
+       0% { left: 0px; font-size: 14px; }
+   1% { left: -5px; font-size: 14px; }
+   
+    3% { left: 5px; font-size: 14px; }
+
+    5% { left: -3px; font-size: 14px; }
+    
+    7% { left: 3px; font-size: 14px; }
+    9% { left: -1px; font-size: 14px; }
+    10% { left: 0px; font-size: 14px; }
+    100% { left: 0px; font-size: 14px; }
+}
+
+keyframes shaking {
+       0% { left: 0px; font-size: 14px; }
+   1% { left: -5px; font-size: 14px; }
+   
+    3% { left: 5px; font-size: 14px; }
+
+    5% { left: -3px; font-size: 14px; }
+    
+    7% { left: 3px; font-size: 14px; }
+    9% { left: -1px; font-size: 14px; }
+    10% { left: 0px; font-size: 14px; }
+    100% { left: 0px; font-size: 14px; }
+   
+}
+
+
+
+
+.rightshake { 
+
+  animation: rightshaking 5s infinite;
+    
+}
+
+
+@-webkit-keyframes rightshaking {
+       0% { right: 0px; font-size: 14px; }
+   1% { right: -5px; font-size: 14px; }
+   
+    3% { right: 5px; font-size: 14px; }
+
+    5% { right: -3px; font-size: 14px; }
+    
+    7% { right: 3px; font-size: 14px; }
+    9% { right: -1px; font-size: 14px; }
+    10% { right: 0px; font-size: 14px; }
+    100% { right: 0px; font-size: 14px; }
+
+   
+
+}
+@-moz-keyframes rightshaking {
+       0% { right: 0px; font-size: 14px; }
+   1% { right: -5px; font-size: 14px; }
+   
+    3% { right: 5px; font-size: 14px; }
+
+    5% { right: -3px; font-size: 14px; }
+    
+    7% { right: 3px; font-size: 14px; }
+    9% { right: -1px; font-size: 14px; }
+    10% { right: 0px; font-size: 14px; }
+    100% { right: 0px; font-size: 14px; }
+}
+keyframes rightshaking {
+       0% { right: 0px; font-size: 14px; }
+   1% { right: -5px; font-size: 14px; }
+   
+    3% { right: 5px; font-size: 14px; }
+
+    5% { right: -3px; font-size: 14px; }
+    
+    7% { right: 3px; font-size: 14px; }
+    9% { right: -1px; font-size: 14px; }
+    10% { right: 0px; font-size: 14px; }
+    100% { right: 0px; font-size: 14px; }
+   
+}
+
+
+
+
+
+
+.loadingv{
+    animation: loadingvideo 3s infinite alternate !important;
+}
+
+@-webkit-keyframes loadingvideo {
+    
+    0% {-ms-filter: grayscale(1) brightness(80%);
+            -webkit-filter: grayscale(1) brightness(80%);
+            -moz-filter: grayscale(1) brightness(80%);
+            -o-filter: grayscale(1) brightness(80%);
+            filter: grayscale(1) brightness(80%); }
+
+
+   100% { -ms-filter: grayscale(1) brightness(150%);
+        -webkit-filter: grayscale(1) brightness(150%);
+        -moz-filter: grayscale(1) brightness(150%);
+        -o-filter: grayscale(1) brightness(150%);
+        filter: grayscale(1) brightness(150%); }
+   
+
+}
+@-moz-keyframes loadingvideo {
+   0% {-ms-filter: grayscale(1) brightness(80%);
+            -webkit-filter: grayscale(1) brightness(80%);
+            -moz-filter: grayscale(1) brightness(80%);
+            -o-filter: grayscale(1) brightness(80%);
+            filter: grayscale(1) brightness(80%); }
+
+
+   100% { -ms-filter: grayscale(1) brightness(150%);
+        -webkit-filter: grayscale(1) brightness(150%);
+        -moz-filter: grayscale(1) brightness(150%);
+        -o-filter: grayscale(1) brightness(150%);
+        filter: grayscale(1) brightness(150%); }
+}
+keyframes loadingvideo {
+      0% {-ms-filter: grayscale(1) brightness(80%);
+            -webkit-filter: grayscale(1) brightness(80%);
+            -moz-filter: grayscale(1) brightness(80%);
+            -o-filter: grayscale(1) brightness(80%);
+            filter: grayscale(1) brightness(80%); }
+
+
+   100% { -ms-filter: grayscale(1) brightness(150%);
+        -webkit-filter: grayscale(1) brightness(150%);
+        -moz-filter: grayscale(1) brightness(150%);
+        -o-filter: grayscale(1) brightness(150%);
+        filter: grayscale(1) brightness(150%); }
+   
+}
+
+
+.loadedv{
+    animation: loadedvideo 2s !important;
+}
+
+@-webkit-keyframes loadedvideo {
+    
+    0% {-ms-filter: grayscale(1) brightness(100%);
+            -webkit-filter: grayscale(1) brightness(100%);
+            -moz-filter: grayscale(1) brightness(100%);
+            -o-filter: grayscale(1) brightness(100%);
+            filter: grayscale(1) brightness(100%); }
+
+
+   100% { -ms-filter: grayscale(0) brightness(100%);
+        -webkit-filter: grayscale(0) brightness(100%);
+        -moz-filter: grayscale(0) brightness(100%);
+        -o-filter: grayscale(0) brightness(100%);
+        filter: grayscale(0) brightness(100%); }
+   
+
+}
+@-moz-keyframes loadedvideo {
+   0% {-ms-filter: grayscale(1) brightness(100%);
+            -webkit-filter: grayscale(1) brightness(100%);
+            -moz-filter: grayscale(1) brightness(100%);
+            -o-filter: grayscale(1) brightness(100%);
+            filter: grayscale(1) brightness(100%); }
+
+
+   100% { -ms-filter: grayscale(0) brightness(100%);
+        -webkit-filter: grayscale(0) brightness(100%);
+        -moz-filter: grayscale(0) brightness(100%);
+        -o-filter: grayscale(0) brightness(100%);
+        filter: grayscale(0) brightness(100%); }
+}
+keyframes loadedvideo {
+      0% {-ms-filter: grayscale(1) brightness(100%);
+            -webkit-filter: grayscale(1) brightness(100%);
+            -moz-filter: grayscale(1) brightness(100%);
+            -o-filter: grayscale(1) brightness(100%);
+            filter: grayscale(1) brightness(100%); }
+
+
+   100% { -ms-filter: grayscale(0) brightness(100%);
+        -webkit-filter: grayscale(0) brightness(100%);
+        -moz-filter: grayscale(0) brightness(100%);
+        -o-filter: grayscale(0) brightness(100%);
+        filter: grayscale(0) brightness(100%); }
+   
+}
+
+.failedvid{
+-ms-filter: grayscale(0.5) brightness(100%);
+        -webkit-filter: grayscale(0.5) brightness(100%);
+        -moz-filter: grayscale(0.5) brightness(100%);
+        -o-filter: grayscale(0.5) brightness(100%);
+        filter: grayscale(0.5) brightness(100%);
+}
+
+
+.failedv{
+    animation: failedvideo 2s !important;
+}
+
+@-webkit-keyframes failedvideo {
+    
+    0% {-ms-filter: grayscale(1) brightness(100%);
+            -webkit-filter: grayscale(1) brightness(100%);
+            -moz-filter: grayscale(1) brightness(100%);
+            -o-filter: grayscale(1) brightness(100%);
+            filter: grayscale(1) brightness(100%); }
+
+
+   100% { -ms-filter: grayscale(0.7) brightness(100%);
+        -webkit-filter: grayscale(0.7) brightness(100%);
+        -moz-filter: grayscale(0.7) brightness(100%);
+        -o-filter: grayscale(0.7) brightness(100%);
+        filter: grayscale(0.7) brightness(100%); }
+   
+
+}
+@-moz-keyframes failedvideo {
+   0% {-ms-filter: grayscale(1) brightness(100%);
+            -webkit-filter: grayscale(1) brightness(100%);
+            -moz-filter: grayscale(1) brightness(100%);
+            -o-filter: grayscale(1) brightness(100%);
+            filter: grayscale(1) brightness(100%); }
+
+
+   100% { -ms-filter: grayscale(0.7) brightness(100%);
+        -webkit-filter: grayscale(0.7) brightness(100%);
+        -moz-filter: grayscale(0.7) brightness(100%);
+        -o-filter: grayscale(0.7) brightness(100%);
+        filter: grayscale(0.7) brightness(100%); }
+}
+keyframes failedvideo {
+      0% {-ms-filter: grayscale(1) brightness(100%);
+            -webkit-filter: grayscale(1) brightness(100%);
+            -moz-filter: grayscale(1) brightness(100%);
+            -o-filter: grayscale(1) brightness(100%);
+            filter: grayscale(1) brightness(100%); }
+
+
+   100% { -ms-filter: grayscale(0.7) brightness(100%);
+        -webkit-filter: grayscale(0.7) brightness(100%);
+        -moz-filter: grayscale(0.7) brightness(100%);
+        -o-filter: grayscale(0.7) brightness(100%);
+        filter: grayscale(0.7) brightness(100%); }
+   
+}
+
+
+
+.enterFromRight { 
+
+  animation: enterFromRight 5s ;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+    
+}
+
+
+@-webkit-keyframes enterFromRight {
+       0% { left: 200%; }
+    100% { left: 0%; }
+
+   
+
+}
+@-moz-keyframes enterFromRight {
+       0% { left: 200%; }
+    100% { left: 0%; }
+}
+keyframes enterFromRight {
+        0% { left: 200%; }
+    100% { left: 0%; }
+   
+}
+
+
+.leaveToLeft { 
+
+  animation: leaveToLeft 5s ;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+    
+}
+
+
+@-webkit-keyframes leaveToLeft {
+       0% { left: 0%; }
+    100% { left: -200%; }
+
+   
+
+}
+@-moz-keyframes leaveToLeft {
+       0% { left: 0%; }
+    100% { left: -200%; }
+}
+keyframes leaveToLeft {
+        0% { left: 0%; }
+    100% { left: -200%; }
+   
+}
+
+
+.blink { 
+
+  
+  animation: blinking 1s infinite;
+}
+
+
+@-webkit-keyframes blinking {
+   0% { text-shadow: 0px 0px 0px #00ffff; opacity: 0.5 }
+   100% { text-shadow: 0px 0px 0px #00ffff; opacity: 1 }
+}
+@-moz-keyframes blinking {
+   0% { text-shadow: 0px 0px 0px #00ffff; opacity: 0.5 }
+   100% { text-shadow: 0px 0px 0px #00ffff; opacity: 1 }
+}
+keyframes blinking {
+   0% { text-shadow: 0px 0px 0px #00ffff; opacity: 0.5 }
+   100% { text-shadow: 0px 0px 0px #00ffff; opacity: 1 }
+}
+
+
+.scrollhilite { 
+
+  
+  animation: scrollhilited 1s infinite;
+}
+
+
+@-webkit-keyframes scrollhilited {
+   0% { background-color: white; }
+}
+@-moz-keyframes scrollhilited {
+   0% { background-color: white; }
+}
+keyframes scrollhilited {
+   0% { background-color: white; }
+}
+
+
+.beat { 
+
+  animation: beating 1s infinite;
+    
+}
+
+
+
+
+
+@-webkit-keyframes beating {
+    0% { transform: scale(1); }
+    40% { transform: scale(1); }
+    45% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+    55% { transform: scale(1); }
+    60% { transform: scale(1.2); }
+    65% { transform: scale(1); }
+    100% { transform: scale(1); }
+
+   
+
+}
+@-moz-keyframes beating {
+    0% { transform: scale(1); }
+    40% { transform: scale(1); }
+    45% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+    55% { transform: scale(1); }
+    60% { transform: scale(1.2); }
+    65% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+keyframes beating {
+    0% { transform: scale(1); }
+    40% { transform: scale(1); }
+    45% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+    55% { transform: scale(1); }
+    60% { transform: scale(1.2); }
+    65% { transform: scale(1); }
+    100% { transform: scale(1); }
+   
+}
+
+
+
+
+.linear-wipe {
+    text-align: center;
+    background: linear-gradient(to right, #FFF 20%, #404444 48%, #626c6c 52%, #FFF 80%);
+    background-size: 200% auto;
+    color: #000;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 1s linear infinite;
+    pointer-events: none;
+   }
+
+  @keyframes shine {
+    to {
+      background-position: -200% center;
+    }
+  }
+
+
+
+/*----------------------------------*/
+
+
+
+
+
+
+
+
+.help:hover{
+   background-color: #f2e1e0;
+}
+ 
+
+
+
+
+
+
+
